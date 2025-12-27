@@ -150,6 +150,12 @@ void parse_rmc(char* line)
         xSemaphoreGive(gps_mutex);
         ESP_LOGI("GPS", "LAT: %.6f | LON: %.6f",internal_gps_data.gps_data.latitude, internal_gps_data.gps_data.longtitude); 
     }
+    else{
+        xSemaphoreTake(gps_mutex, portMAX_DELAY);
+        internal_gps_data.gps_data.latitude = -1;
+        internal_gps_data.gps_data.longtitude = -1;
+        xSemaphoreGive(gps_mutex);
+    }
 }
 
 static void parse_vtg(char* line)
