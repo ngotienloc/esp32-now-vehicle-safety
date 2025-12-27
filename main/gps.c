@@ -5,11 +5,12 @@ static QueueHandle_t uart_queue;
 static SemaphoreHandle_t gps_mutex; 
 static void parse_vtg(char* line);
 
+/*================== PROTOTYPE =====================*/
 static float nmea_to_decimal(float raw);
 void gps_task(void *arg);
 void parse_rmc(char* line);
 
-/*============CONFIG==============*/
+/*====================CONFIG========================*/
 #define GPS_UART_PORT UART_NUM_1
 #define GPS_BAURATE   9600
 #define GPS_TX_PIN    GPIO_NUM_17
