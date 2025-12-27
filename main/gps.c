@@ -148,7 +148,7 @@ void parse_rmc(char* line)
         if(lat_dir == 'S')  internal_gps_data.gps_data.latitude = -internal_gps_data.gps_data.latitude;
         if(long_dir == 'W') internal_gps_data.gps_data.longtitude = -internal_gps_data.gps_data.longtitude;
         xSemaphoreGive(gps_mutex);
-        ESP_LOGI("GPS", "LAT: %.6f | LON: %.6f",internal_gps_data.gps_data.latitude, internal_gps_data.gps_data.longtitude); 
+        //ESP_LOGI("GPS", "LAT: %.6f | LON: %.6f",internal_gps_data.gps_data.latitude, internal_gps_data.gps_data.longtitude); 
     }
     else{
         xSemaphoreTake(gps_mutex, portMAX_DELAY);
