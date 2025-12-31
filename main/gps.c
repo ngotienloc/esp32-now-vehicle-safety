@@ -133,6 +133,10 @@ void parse_rmc(char* line)
         field++; 
 
         xSemaphoreTake(gps_mutex, portMAX_DELAY);
+        if(field == 2 && strlen(token) >= 6)
+        {
+            snprintf(internal_gps_data.timestamp, sizeof(internal_gps_data.timestamp), "%.2s:%.2s:%.2s", token, token+2, token+4);
+        }
         if(field == 3)  internal_gps_data.gps_data.status = token[0]; 
         if(field == 4)  internal_gps_data.gps_data.latitude = nmea_to_decimal(atof(token));
         if(field == 5)  lat_dir = token[0];
@@ -148,7 +152,7 @@ void parse_rmc(char* line)
         if(lat_dir == 'S')  internal_gps_data.gps_data.latitude = -internal_gps_data.gps_data.latitude;
         if(long_dir == 'W') internal_gps_data.gps_data.longtitude = -internal_gps_data.gps_data.longtitude;
         xSemaphoreGive(gps_mutex);
-        //ESP_LOGI("GPS", "LAT: %.6f | LON: %.6f",internal_gps_data.gps_data.latitude, internal_gps_data.gps_data.longtitude); 
+        ESP_LOGI("GPS", "TIME: %s | LAT: %.6f | LON: %.6f",internal_gps_data.timestamp,internal_gps_data.gps_data.latitude, internal_gps_data.gps_data.longtitude); 
     }
     else{
         xSemaphoreTake(gps_mutex, portMAX_DELAY);

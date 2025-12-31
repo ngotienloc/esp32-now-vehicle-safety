@@ -22,6 +22,6 @@ typedef struct __attribute__((packed))
     gps gps_data;
     mpu mpu_data; 
     uint8_t rssi; 
-    uint32_t timestamp; 
+    char timestamp[9]; 
 }vehicle_state;
 #endif
