@@ -102,7 +102,7 @@ void espnow_tx_task(void *pvParameter)
         if (err != ESP_OK) {
             ESP_LOGE("ESP_NOW", "ESP-NOW send failed: %s", esp_err_to_name(err));
         }
-        vTaskDelay(pdMS_TO_TICKS(1000)); 
+        vTaskDelay(pdMS_TO_TICKS(50)); 
     }
 }
 
